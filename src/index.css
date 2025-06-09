@@ -1,0 +1,334 @@
+/* src/index.css */
+
+/* 1. Tailwind CSS base, components, and utilities imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Custom CSS Variables */
+:root {
+  /* Static Color Palette (derived from tailwind.config.js for general app UI) */
+  --app-color-primary-50: #f0f9ff;
+  --app-color-primary-100: #e0f2fe;
+  --app-color-primary-200: #bae6fd;
+  --app-color-primary-300: #7dd3fc;
+  --app-color-primary-400: #38bdf8;
+  --app-color-primary-500: #0ea5e9;
+  --app-color-primary-600: #0284c7;
+  --app-color-primary-700: #0369a1;
+  --app-color-primary-800: #075985;
+  --app-color-primary-900: #0c4a6e;
+  --app-color-primary-950: #082f49;
+
+  --app-color-brand-500: #422AFB; /* Example brand color from tailwind config */
+
+  --app-color-slate-50: #F9FAFB;
+  --app-color-slate-100: #F4F5F7;
+  --app-color-slate-200: #E5E7EB;
+  --app-color-slate-300: #D2D6DC;
+  --app-color-slate-400: #9FA6B2;
+  --app-color-slate-500: #6B7280;
+  --app-color-slate-600: #4B5563;
+  --app-color-slate-700: #374151;
+  --app-color-slate-800: #1F2937;
+  --app-color-slate-900: #111827;
+
+  --app-color-text-default: var(--app-color-slate-800);
+  --app-color-text-muted: var(--app-color-slate-600);
+  --app-color-bg-body: var(--app-color-slate-50);
+  --app-color-bg-card: #ffffff;
+  --app-color-border-default: var(--app-color-slate-200);
+  --app-color-border-input: var(--app-color-slate-300);
+  --app-color-border-input-focus: var(--app-color-primary-500);
+
+  --app-color-danger: #ef4444; /* red-500 */
+  --app-color-success: #22c55e; /* green-500 */
+  --app-color-info: #3b82f6; /* blue-500 */
+
+  /* Static Typography (for general app UI) */
+  --app-font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --app-font-family-serif: "Merriweather", Georgia, Cambria, "Times New Roman", Times, serif;
+  
+  --app-font-size-base: 1rem; /* 16px */
+  --app-line-height-base: 1.6;
+
+  /* Dynamic Theme Variables (Defaults based on 'modern' theme, updated by JavaScript) */
+  /* These variables are primarily for the resume preview content. */
+  /* The default --theme-primary (#0891b2) is from 'modern' theme (cyan.600), */
+  /* which is different from Tailwind's primary.600 (#0284c7) used in --app-color-primary-600. */
+  /* This distinction is intentional for theming. */
+  --theme-primary: #0891b2;
+  --theme-secondary: #0e7490;
+  --theme-text-primary: #1F2937;
+  --theme-text-secondary: #4B5563;
+  --theme-text-accent: #0891b2;
+  --theme-bg-primary: #ffffff;
+  --theme-bg-secondary: #F4F5F7;
+  --theme-bg-accent: #ecfeff; /* Corresponds to cyan.50 or a light version of modern theme's primary */
+  --theme-border: #D2D6DC;
+  --theme-spacing-section: "2rem";
+  --theme-spacing-item: "1.5rem";
+  --theme-font-heading: "Inter", sans-serif;
+  --theme-font-body: "Inter", sans-serif;
+  --theme-font-size-name: "2.25rem";
+  --theme-font-size-title: "1.5rem";
+  --theme-font-size-subtitle: "1.25rem";
+  --theme-font-size-body: "1rem";
+  --theme-font-size-small: "0.875rem";
+
+  /* Layout */
+  --app-border-radius: 0.375rem; /* Tailwind's rounded-md */
+  --app-input-padding-y: 0.5rem;
+  --app-input-padding-x: 0.75rem;
+}
+
+/* 3. Global reset styles and default font settings */
+/* Apply a natural box layout model to all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding on common elements */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: var(--app-line-height-base);
+  font-size: var(--app-font-size-base);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--app-font-family-sans);
+  color: var(--app-color-text-default);
+  background-color: var(--app-color-bg-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--app-font-family-sans); /* Default for app UI, resume preview uses --theme-font-heading */
+  font-weight: 600; /* semibold */
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+a {
+  color: var(--app-color-primary-600);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--app-color-primary-700);
+  text-decoration: underline;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom Scrollbars (Webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--app-color-slate-100);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--app-color-slate-300);
+  border-radius: 10px;
+  border: 2px solid var(--app-color-slate-100); /* Creates padding around thumb */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--app-color-slate-400);
+}
+
+
+/* 4. Base styles for form elements and buttons */
+@layer base {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="month"],
+  textarea,
+  select {
+    @apply block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm
+           placeholder-slate-400 bg-white
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           sm:text-sm transition-colors duration-150;
+    color: var(--app-color-text-default);
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply h-4 w-4 text-primary-600 border-slate-300 rounded focus:ring-offset-0 focus:ring-2 focus:ring-primary-500;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  /* General button styling using @apply for consistency with Tailwind */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent
+           text-sm font-medium rounded-md shadow-sm whitespace-nowrap
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           transition-all duration-150 ease-in-out;
+  }
+  .btn:disabled, button:disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  .btn-primary:disabled {
+    @apply bg-primary-400 hover:bg-primary-400;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-200 text-slate-800 hover:bg-slate-300 focus:ring-slate-400 border-slate-300;
+  }
+  .btn-secondary:disabled {
+    @apply bg-slate-100 hover:bg-slate-100 text-slate-400;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
+  
+  .btn-icon { /* For buttons that only contain an icon */
+    @apply p-2;
+  }
+}
+
+/* 5. Print-specific styles */
+@media print {
+  body {
+    background-color: #fff !important;
+    color: #000 !important;
+    font-size: 10pt;
+    line-height: 1.4;
+    font-family: var(--theme-font-body, var(--app-font-family-sans)) !important; /* Prioritize theme font */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide elements not intended for printing */
+  .app-header, 
+  .app-footer, 
+  .resume-form-container, /* Assuming main form wrapper has this class */
+  .resume-preview-controls, /* Toolbar above resume preview */
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  /* Adjust the resume preview pane and content for printing */
+  .resume-preview-pane { /* The main fixed container for the preview */
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #fff !important;
+  }
+
+  .resume-preview-scroll-area { /* Inner div that might have padding/bg for screen */
+    padding: 0 !important;
+    background-color: #fff !important;
+  }
+
+  /* Styles for the actual resume document content being printed */
+  .resume-document-for-print { /* The div referenced by resumeRef */
+    width: 100% !important; 
+    min-height: initial !important; /* Height should be based on content for print */
+    max-height: none !important;
+    margin: 0 auto !important; 
+    padding: 10mm !important; /* Define print margins, adjust as needed */
+    box-shadow: none !important;
+    border: none !important;
+    font-family: var(--theme-font-body, var(--app-font-family-sans)) !important;
+    color: var(--theme-text-primary, #000) !important;
+    background-color: var(--theme-bg-primary, #fff) !important;
+  }
+
+  .resume-document-for-print h1,
+  .resume-document-for-print h2,
+  .resume-document-for-print h3,
+  .resume-document-for-print h4 {
+    font-family: var(--theme-font-heading, var(--app-font-family-sans)) !important;
+    color: var(--theme-primary, #000) !important; /* Example: headings use theme primary color */
+    page-break-after: avoid !important;
+  }
+
+  .resume-document-for-print section {
+     page-break-inside: avoid !important;
+     margin-bottom: 12pt !important; /* Space between sections in print */
+  }
+  
+  .resume-document-for-print ul,
+  .resume-document-for-print ol {
+    padding-left: 1.2em !important; /* Ensure list indentation is visible */
+  }
+
+  .resume-document-for-print a {
+    color: var(--theme-text-accent, var(--app-color-primary-600)) !important;
+    text-decoration: none !important; /* Avoid underlining all links in print unless specifically styled */
+  }
+  .resume-document-for-print a[href]::after {
+    /* content: " (" attr(href) ")"; */ /* Optional: Show URLs for links */
+    content: ""; /* Default: Don't show URLs */
+  }
+
+  /* Ensure all colors from theme are rendered if set via inline styles or CSS vars */
+  .resume-document-for-print * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    /* color: inherit !important; */ /* This might override specific theme colors if not careful */
+    /* background-color: transparent !important; */ /* Let theme define backgrounds */
+  }
+  
+  /* Images */
+  .resume-document-for-print img {
+    max-width: 100% !important; /* Ensure images don't overflow */
+    height: auto !important;
+    page-break-inside: avoid !important;
+  }
+}
